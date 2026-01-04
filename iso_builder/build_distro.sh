@@ -47,7 +47,7 @@ lb config \
 
 # 4. Package Selection
 echo ">>> [VOID BUILDER] Selecting Packages..."
-echo "xorg openbox nodejs npm python3 python3-pip git curl pulseaudio" > config/package-lists/my.list.chroot
+echo "xorg openbox nodejs npm python3 python3-pip git curl pulseaudio firefox-esr fcitx5 fcitx5-chinese-addons network-manager" > config/package-lists/my.list.chroot
 
 # 5. Inject VOID OS Files
 echo ">>> [VOID BUILDER] Injecting VOID OS Codebase from $VOID_SOURCE_DIR..."
@@ -68,6 +68,12 @@ xset s noblank
 
 # Start Audio
 pulseaudio --start
+
+# Start Input Method (Chinese)
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS=@im=fcitx
+fcitx5 -d &
 
 # Start VOID OS
 cd /opt/void-os
