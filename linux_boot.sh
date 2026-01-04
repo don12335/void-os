@@ -46,5 +46,7 @@ fi
 # pip3 install -r requirements.txt
 
 # 4. Launch Application
-echo "Starting Electron..."
-npm start
+# 4. Launch Application
+echo "Starting Electron (as root with --no-sandbox)..."
+# We must use --no-sandbox because we are running as root in the ISO
+./node_modules/.bin/electron . --no-sandbox > /var/log/void-os.log 2>&1 || xterm
