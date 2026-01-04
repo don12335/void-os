@@ -1,0 +1,20 @@
+{
+    "name": "void-os",
+    "version": "2.0.0",
+    "description": "VOID OS - Ancient Egypt Edition",
+    "main": "main.js",
+    "scripts": {
+        "start": "electron ."
+    },
+    "keywords": [
+        "void",
+        "os",
+        "egypt",
+        "desktop"
+    ],
+    "author": "VOID TEK",
+    "license": "ISC",
+    "devDependencies": {
+        "electron": "^33.0.0"
+    }
+}

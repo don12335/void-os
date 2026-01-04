@@ -1,0 +1,846 @@
+/* =========================================
+   VOID OS: DIGITAL DYNASTY THEME v2.0
+   ========================================= */
+
+/* --- 1. CORE VARIABLES & SETUP --- */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Quicksand:wght@300;400;600&display=swap');
+
+:root {
+    /* Palette: The Pharaoh's Circuitry (Ancient Matte) */
+    --void-onyx: #050505;
+    --void-deep: #0a0a0c;
+    --gold-sun: #d4af37;
+    /* Metallic Gold */
+    --gold-dim: #8a7030;
+    /* Dull Gold */
+    --lapis-river: #1A5F7A;
+    --sandstone: #C2B280;
+    --spectral-turquoise: #40E0D0;
+    /* Accent only */
+
+    /* UI Components */
+    --glass-slab: rgba(10, 10, 12, 0.95);
+    --border-gold: 1px solid var(--gold-dim);
+    --border-active: 1px solid var(--gold-sun);
+
+    /* Effects */
+    --radius-sharp: 2px;
+    --shadow-depth: 0 10px 20px rgba(0, 0, 0, 0.9);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+}
+
+body {
+    background-color: var(--void-onyx);
+    color: var(--sandstone);
+    font-family: 'Quicksand', sans-serif;
+    height: 100vh;
+    overflow: hidden;
+    background-image:
+        radial-gradient(circle at 50% 50%, #111 0%, transparent 80%),
+        linear-gradient(0deg, var(--void-onyx) 0%, #0f0f15 100%);
+}
+
+/* =========================================
+   2. INTRO SEQUENCE (Startup)
+   ========================================= */
+#intro-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10000;
+    background: radial-gradient(circle at center, #111115 0%, #000000 70%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+    overflow: hidden;
+}
+
+#void-dust {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        radial-gradient(1px 1px at 50% 50%, rgba(200, 200, 200, 0.3) 1px, transparent 0),
+        radial-gradient(1px 1px at 20% 80%, rgba(200, 200, 200, 0.2) 1px, transparent 0),
+        radial-gradient(2px 2px at 90% 10%, rgba(200, 200, 200, 0.2) 1px, transparent 0);
+    background-size: 200px 200px;
+    animation: dustFloat 60s linear infinite;
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+.intro-content {
+    text-align: center;
+    cursor: pointer;
+    z-index: 1;
+    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.intro-content:hover {
+    transform: scale(1.02);
+}
+
+.ankh-symbol {
+    font-size: 6rem;
+    color: transparent;
+    background: linear-gradient(135deg, #d4af37 20%, #aa8844 50%, #d4af37 80%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    margin-bottom: 30px;
+    filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.8));
+    animation: ancientLevitate 6s ease-in-out infinite;
+}
+
+.enter-text {
+    font-family: 'Cinzel', serif;
+    font-size: 1.2rem;
+    color: #887766;
+    letter-spacing: 12px;
+    opacity: 0.7;
+    transition: all 0.5s ease;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
+    border-bottom: 1px solid transparent;
+    padding-bottom: 10px;
+}
+
+.intro-content:hover .enter-text {
+    color: #d4af37;
+    opacity: 1;
+    letter-spacing: 16px;
+    border-color: rgba(212, 175, 55, 0.3);
+}
+
+/* =========================================
+   3. SYSTEM BOOT (The Gate)
+   ========================================= */
+#the-gate {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    background: var(--void-onyx);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Cinzel', serif;
+}
+
+.pyramid-loader {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    transform-style: preserve-3d;
+    animation: rotatePyramid 4s linear infinite;
+    margin-bottom: 40px;
+}
+
+.triangle {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 86.6px solid var(--gold-dim);
+    opacity: 0.9;
+}
+
+.triangle:nth-child(1) {
+    transform: rotateY(0deg) translateZ(28.8px) rotateX(30deg);
+}
+
+.triangle:nth-child(2) {
+    transform: rotateY(120deg) translateZ(28.8px) rotateX(30deg);
+}
+
+.triangle:nth-child(3) {
+    transform: rotateY(240deg) translateZ(28.8px) rotateX(30deg);
+}
+
+.boot-text {
+    color: var(--sandstone);
+    font-size: 1.2rem;
+    letter-spacing: 4px;
+    text-align: center;
+    min-height: 1.5em;
+}
+
+.progress-bar {
+    width: 300px;
+    height: 2px;
+    background: #222;
+    margin-top: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0%;
+    background: var(--gold-sun);
+    transition: width 0.1s linear;
+}
+
+/* =========================================
+   4. DESKTOP ENVIRONMENT (The Sanctuary)
+   ========================================= */
+#the-sanctuary {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    opacity: 0;
+    background: repeating-linear-gradient(90deg, var(--void-onyx), var(--void-onyx) 50px, #080808 50px, #080808 51px);
+    transition: opacity 1s ease;
+}
+
+#pyramid-bg {
+    position: absolute;
+    bottom: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 400px;
+    background: linear-gradient(0deg, transparent, rgba(30, 30, 35, 0.5));
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* --- Taskbar (The Nile) --- */
+#the-nile {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 70px;
+    background: var(--glass-slab);
+    border: var(--border-gold);
+    border-radius: var(--radius-sharp);
+    display: flex;
+    align-items: center;
+    padding: 0 30px;
+    gap: 20px;
+    backdrop-filter: blur(15px);
+    box-shadow: var(--shadow-depth);
+    z-index: 1000;
+}
+
+#system-tray {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-left: auto;
+    /* Push to right if flex-grow spacer fails */
+    padding-left: 20px;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    height: 100%;
+}
+
+.tray-item {
+    color: var(--sandstone);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: default;
+    transition: color 0.3s;
+}
+
+.tray-item:hover {
+    color: var(--gold-sun);
+    text-shadow: 0 0 5px rgba(212, 175, 55, 0.5);
+}
+
+#tray-clock {
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    letter-spacing: 1px;
+    min-width: 60px;
+    text-align: center;
+}
+
+.nile-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-sharp);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--sandstone);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    border: 1px solid transparent;
+}
+
+.nile-icon:hover {
+    color: var(--gold-sun);
+    transform: translateY(-5px);
+    border-color: var(--gold-dim);
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.nile-icon i {
+    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.5));
+}
+
+#system-seal {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    border: 1px solid rgba(170, 68, 68, 0.4);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #aa4444;
+    cursor: pointer;
+    background: rgba(10, 10, 12, 0.6);
+    backdrop-filter: blur(5px);
+    transition: all 0.4s ease;
+    z-index: 500;
+}
+
+#system-seal:hover {
+    color: #ff4444;
+    border-color: #ff4444;
+    transform: scale(1.1) rotate(90deg);
+}
+
+/* --- Start Menu --- */
+#start-menu {
+    position: absolute;
+    bottom: 100px;
+    left: 20px;
+    width: 250px;
+    background: var(--glass-slab);
+    border: 1px solid var(--gold-dim);
+    border-radius: var(--radius-sharp);
+    padding: 10px;
+    backdrop-filter: blur(20px);
+    z-index: 2000;
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    animation: fadeUp 0.3s ease;
+    box-shadow: var(--shadow-depth);
+}
+
+#start-menu.visible {
+    display: flex;
+}
+
+.menu-item {
+    padding: 10px 15px;
+    color: var(--sandstone);
+    cursor: pointer;
+    border-radius: var(--radius-sharp);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.2s ease;
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+}
+
+.menu-item:hover {
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--gold-sun);
+    transform: translateX(5px);
+}
+
+.menu-separator {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 5px 0;
+}
+
+/* =========================================
+   5. WINDOW MANAGER
+   ========================================= */
+.window-frame {
+    position: absolute;
+    background: #0c0c0e;
+    border: 1px solid var(--sandstone);
+    box-shadow: var(--shadow-depth), 0 0 0 1px rgba(0, 0, 0, 0.5);
+    border-radius: var(--radius-sharp);
+    display: flex;
+    flex-direction: column;
+    min-width: 400px;
+    min-height: 300px;
+    overflow: hidden;
+    /* Animation handled by .window-opening class now */
+}
+
+.window-header {
+    height: 40px;
+    background: linear-gradient(90deg, #111, #1a1a1a);
+    border-bottom: 1px solid var(--sandstone);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px;
+    cursor: grab;
+}
+
+.window-header:active {
+    cursor: grabbing;
+}
+
+.window-title {
+    font-family: 'Cinzel', serif;
+    color: var(--gold-sun);
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.window-controls {
+    display: flex;
+    gap: 8px;
+}
+
+.control-btn {
+    width: 12px;
+    height: 12px;
+    border: 1px solid var(--sandstone);
+    border-radius: 50%;
+    cursor: pointer;
+    opacity: 0.6;
+}
+
+.control-btn.close {
+    background: #ff5555;
+    border-color: #ff0000;
+}
+
+.control-btn.close:hover {
+    background: #ff8888;
+}
+
+.control-btn.maximize {
+    background: #55ff55;
+    border-color: #00ff00;
+}
+
+.control-btn.maximize:hover {
+    background: #88ff88;
+}
+
+.control-btn.minimize {
+    background: #ffff55;
+    border-color: #ffff00;
+}
+
+.control-btn.minimize:hover {
+    background: #ffff88;
+}
+
+.window-content {
+    flex-grow: 1;
+    background: rgba(10, 10, 12, 0.95);
+    color: var(--sandstone);
+    padding: 10px;
+    overflow: auto;
+    position: relative;
+    font-family: 'Courier New', monospace;
+}
+
+/* =========================================
+   6. APPLICATIONS
+   ========================================= */
+
+/* --- The Scribe --- */
+.app-scribe textarea {
+    width: 100%;
+    height: 100%;
+    background: #e6dcc3;
+    color: #332211;
+    border: none;
+    padding: 20px;
+    font-family: 'Crimson Text', serif;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxMDAlJyBoZWlnaHQ9JzEwMCUnPjxmaWx0ZXIgaWQ9J24nPjxmZVR1cmJ1bGVuY2UgdHlwZT0nZnJhY3RhbE5vaXNlJyBiYXNlRnJlcXVlbmN5PScwLjUnIG51bU9jdGF2ZXM9JzEnIHN0aXRjaFRpbGVzPSdzdGl0Y2gnLz48L2ZpbHRlcj48cmVjdCB3aWR0aD0nMTAwJScgaGVpZ2h0PScxMDAlJyBmaWxsPSd0cmFuc3BhcmVudCcvPjxyZWN0IHdpZHRoPScxMDAlJyBoZWlnaHQ9JzEwMCUnIGZpbHRlcj0idXJsKCNuKSIgb3BhY2l0eT0iMC4yIi8+PC9zdmc+');
+    resize: none;
+    outline: none;
+}
+
+/* --- The Oracle (Terminal) --- */
+.app-oracle {
+    background: #000;
+    color: var(--sandstone);
+    padding: 15px;
+}
+
+.terminal-line {
+    margin-bottom: 5px;
+}
+
+.terminal-input-area {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.terminal-prompt {
+    color: var(--gold-dim);
+}
+
+.terminal-input {
+    background: transparent;
+    border: none;
+    color: var(--sandstone);
+    flex-grow: 1;
+    font-family: inherit;
+    outline: none;
+    caret-color: var(--gold-sun);
+}
+
+/* --- The Stargate --- */
+.app-stargate {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    overflow: hidden;
+    background: #000;
+    height: 100%;
+}
+
+.stargate-controls {
+    padding: 8px 10px;
+    background: var(--void-deep);
+    border-bottom: 1px solid var(--gold-dim);
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.stargate-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid #444;
+    color: var(--sandstone);
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-sharp);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s;
+}
+
+.stargate-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--gold-dim);
+    color: var(--gold-sun);
+}
+
+.url-bar-container {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.stargate-input {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid #333;
+    color: var(--sandstone);
+    padding: 6px 10px;
+    font-family: 'Quicksand', sans-serif;
+    border-radius: var(--radius-sharp);
+    outline: none;
+    font-size: 0.9rem;
+}
+
+.stargate-input:focus {
+    border-color: var(--gold-dim);
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.vpn-btn {
+    width: auto;
+    padding: 0 10px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    border-color: #442222;
+    color: #884444;
+}
+
+.vpn-btn.active {
+    border-color: var(--gold-sun);
+    background: rgba(212, 175, 55, 0.1);
+    text-shadow: 0 0 5px var(--gold-sun);
+}
+
+.stargate-viewport {
+    flex-grow: 1;
+    position: relative;
+    display: flex;
+    /* Crucial for webview flex */
+    background: #fff;
+}
+
+/* --- Scales of Anubis --- */
+.app-scales {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at center, #1a1a20, #000);
+    height: 100%;
+}
+
+.scales-container {
+    width: 200px;
+    height: 150px;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.scale-base {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 10px;
+    background: var(--gold-sun);
+    border-radius: 5px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.8);
+}
+
+.scale-arm {
+    position: absolute;
+    top: 20px;
+    left: 10px;
+    right: 10px;
+    height: 4px;
+    background: var(--gold-sun);
+    transform-origin: center;
+    transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.scale-pan {
+    position: absolute;
+    top: 20px;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--gold-dim);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+}
+
+.scale-pan.left {
+    left: 0;
+}
+
+.scale-pan.right {
+    right: 0;
+}
+
+.scale-pan .feather {
+    color: #fff;
+    opacity: 0.8;
+}
+
+.scale-pan .heart {
+    color: #aa4444;
+    transition: color 0.5s;
+}
+
+.stats-readout {
+    font-family: 'Cinzel', serif;
+    color: var(--sandstone);
+    text-align: center;
+    line-height: 1.5;
+}
+
+/* --- The Scarab --- */
+.app-scarab {
+    background: var(--void-deep);
+    height: 100%;
+}
+
+/* --- The Exodus (TempleOS Game) --- */
+.app-game {
+    background: #000;
+    font-family: 'Courier New', monospace;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-canvas {
+    image-rendering: pixelated;
+    background: #000;
+}
+
+/* --- Desktop Icons --- */
+.desktop-icon {
+    position: absolute;
+    width: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    text-align: center;
+    padding: 10px;
+    border-radius: var(--radius-sharp);
+    transition: background 0.3s ease;
+}
+
+.desktop-icon:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.desktop-icon i {
+    font-size: 2rem;
+    color: var(--gold-sun);
+    margin-bottom: 5px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+.desktop-text {
+    font-size: 0.8rem;
+    color: var(--sandstone);
+    text-shadow: 0 1px 2px #000;
+}
+
+/* --- Window Animations (Genie Effect) --- */
+@keyframes windowOpen {
+    0% {
+        opacity: 0;
+        transform: scale(0.1);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.window-opening {
+    animation: windowOpen 0.4s cubic-bezier(0.1, 0.8, 0.2, 1) forwards;
+}
+
+.window-closing {
+    transition: all 0.3s ease-in;
+    transform: scale(0.1) !important;
+    opacity: 0 !important;
+}
+
+.wallpaper-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.wall-option {
+    height: 60px;
+    border: 1px solid var(--sandstone);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.7rem;
+    color: var(--sandstone);
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.wall-option:hover {
+    border-color: var(--gold-sun);
+    background: rgba(212, 175, 55, 0.1);
+    color: var(--gold-sun);
+}
+
+/* =========================================
+   7. ANIMATIONS
+   ========================================= */
+@keyframes dustFloat {
+    from {
+        background-position: 0 0;
+    }
+
+    to {
+        background-position: 200px 200px;
+    }
+}
+
+@keyframes ancientLevitate {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+@keyframes rotatePyramid {
+    0% {
+        transform: rotateY(0deg);
+    }
+
+    100% {
+        transform: rotateY(360deg);
+    }
+}
+
+@keyframes openWindow {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeUp {
+    from {
+        transform: translateY(10px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.hidden {
+    display: none !important;
+}

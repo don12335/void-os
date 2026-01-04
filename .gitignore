@@ -1,0 +1,9 @@
+node_modules/
+__pycache__/
+*.pyc
+iso_builder/work/
+iso_build_work/
+*.iso
+*.iso.tmp
+.DS_Store
+Thumbs.db

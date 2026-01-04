@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VOID OS: EGYPT</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- AUTHENTICATION LAYER REMOVED -->
+
+
+    <!-- INTRO LAYER -->
+    <div id="intro-layer">
+        <div id="void-dust"></div>
+        <div class="intro-content" onclick="os.enterVoid()">
+            <div class="ankh-symbol"><i class="fas fa-ankh"></i></div>
+            <div class="enter-text">ENTER THE VOID</div>
+        </div>
+    </div>
+
+    <!-- BOOT SCREEN -->
+    <div id="the-gate" style="display:none">
+        <div class="pyramid-loader">
+            <div class="triangle"></div>
+            <div class="triangle"></div>
+            <div class="triangle"></div>
+        </div>
+        <div class="boot-text" id="boot-log">INIT_VOID_PROTOCOL...</div>
+        <div class="progress-bar">
+            <div class="progress-fill" id="boot-progress"></div>
+        </div>
+    </div>
+
+    <!-- DESKTOP ENVIRONMENT -->
+    <div id="the-sanctuary">
+        <div id="pyramid-bg"></div>
+
+        <!-- DESKTOP ICONS LAYER -->
+        <div id="desktop-layer" ondrop="os.dropOnDesktop(event)" ondragover="event.preventDefault()">
+            <!-- Icons dropped here -->
+        </div>
+
+        <!-- WINDOWS AREA -->
+        <div id="window-layer">
+            <!-- Windows appended here via JS -->
+        </div>
+
+        <!-- SYSTEM SEAL (Logout) -->
+        <div id="system-seal" onclick="os.logout()" title="Seal the Gate (Logout)">
+            <i class="fas fa-power-off"></i>
+        </div>
+
+        <!-- START MENU -->
+        <div id="start-menu">
+            <div class="menu-item" draggable="true" ondragstart="os.dragStart(event, 'scribe')"
+                onclick="os.openApp('scribe'); os.toggleStartMenu()">
+                <i class="fas fa-scroll"></i> The Scribe
+            </div>
+            <div class="menu-item" draggable="true" ondragstart="os.dragStart(event, 'oracle')"
+                onclick="os.openApp('oracle'); os.toggleStartMenu()">
+                <i class="fas fa-terminal"></i> The Oracle
+            </div>
+            <div class="menu-item" draggable="true" ondragstart="os.dragStart(event, 'treasury')"
+                onclick="os.openApp('treasury'); os.toggleStartMenu()">
+                <i class="fas fa-box-open"></i> The Treasury
+            </div>
+            <div class="menu-separator"></div>
+            <div class="menu-item" draggable="true" ondragstart="os.dragStart(event, 'stargate')"
+                onclick="os.openApp('stargate'); os.toggleStartMenu()">
+                <i class="fas fa-globe-africa"></i> The Stargate
+            </div>
+            <div class="menu-item" draggable="true" ondragstart="os.dragStart(event, 'scales')"
+                onclick="os.openApp('scales'); os.toggleStartMenu()">
+                <i class="fas fa-balance-scale"></i> Scales of Anubis
+            </div>
+            <div class="menu-item" draggable="true" ondragstart="os.dragStart(event, 'scarab')"
+                onclick="os.openApp('scarab'); os.toggleStartMenu()">
+                <i class="fas fa-cog"></i> The Scarab
+            </div>
+            <div class="menu-separator"></div>
+            <div class="menu-item" draggable="true" ondragstart="os.dragStart(event, 'game')"
+                onclick="os.openApp('game'); os.toggleStartMenu()">
+                <i class="fas fa-cross"></i> The Exodus
+            </div>
+            <div class="menu-item" draggable="true" ondragstart="os.dragStart(event, 'pharaoh')"
+                onclick="os.openApp('pharaoh'); os.toggleStartMenu()">
+                <i class="fas fa-dungeon"></i> The Pharaoh
+            </div>
+            <div class="menu-separator"></div>
+            <div class="menu-item" onclick="os.logout()">
+                <i class="fas fa-power-off" style="color:#aa4444"></i> Seal the Gate
+            </div>
+        </div>
+
+        <!-- TASKBAR -->
+        <div id="the-nile" ondrop="os.dropOnTaskbar(event)" ondragover="event.preventDefault()">
+            <!-- Start Button (Pharaoh's Staff) -->
+            <div class="nile-icon" onclick="os.toggleStartMenu()" title="Pharaoh's Menu">
+                <i class="fas fa-ankh"></i>
+            </div>
+            <div style="width:1px; height:30px; background:rgba(255,255,255,0.1); margin:0 10px;"></div>
+            <!-- Separator -->
+
+            <div class="nile-icon" id="task-scribe" onclick="os.openApp('scribe')" title="The Scribe">
+                <i class="fas fa-scroll"></i>
+            </div>
+            <div class="nile-icon" id="task-oracle" onclick="os.openApp('oracle')" title="The Oracle">
+                <i class="fas fa-terminal"></i>
+            </div>
+            <div class="nile-icon" id="task-treasury" onclick="os.openApp('treasury')" title="The Treasury">
+                <i class="fas fa-box-open"></i>
+            </div>
+            <div style="flex-grow:1"></div>
+
+            <!-- System Tray -->
+            <div id="system-tray">
+                <div class="tray-item" id="tray-wifi" title="VOID_NET: Connected">
+                    <i class="fas fa-wifi"></i>
+                </div>
+                <div class="tray-item" id="tray-battery" title="Power Cell">
+                    <i class="fas fa-battery-full"></i> <span id="battery-level">--%</span>
+                </div>
+                <div class="tray-item" id="tray-clock">
+                    00:00
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/three.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/os.js') }}"></script>
+</body>
+
+</html>
