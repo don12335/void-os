@@ -48,5 +48,5 @@ fi
 # 4. Launch Application
 # 4. Launch Application
 echo "Starting Electron..."
-# Try running as current user first, fallback to no-sandbox if needed
-./node_modules/.bin/electron . > /tmp/void-os.log 2>&1 || ./node_modules/.bin/electron . --no-sandbox > /tmp/void-os.log 2>&1 || xterm
+# Use strict compatibility flags (disable GPU) for VM/ISO stability
+./node_modules/.bin/electron . --no-sandbox --disable-gpu --disable-software-rasterizer > /tmp/void-os.log 2>&1 || xterm
