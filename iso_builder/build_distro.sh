@@ -12,13 +12,14 @@ DISTRO_NAME="void-os"
 ARCH="amd64"
 DEBIAN_VERSION="bookworm"
 
-# Fix for "Space in Path" error:
-# live-build fails if the current path has spaces.
-# We will build in /tmp (safe path) and copy the ISO back.
-ORIGINAL_DIR=$(pwd)
+# Fix for "Space in Path" and "Wrong Directory" errors:
+# We resolve the directory where THIS script resides, then find the project root.
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+ORIGINAL_DIR=$(pwd) # Keep track of where user ran it from
 WORK_DIR="/tmp/void-os-build-system"
-# Resolve absolute path to source to act as source for rsync
-VOID_SOURCE_DIR=$(realpath "$ORIGINAL_DIR/../")
+
+# Project Root is one level up from iso_builder
+VOID_SOURCE_DIR=$(realpath "$SCRIPT_DIR/../")
 
 echo ">>> [VOID BUILDER] Initializing Project Sarcophagus..."
 echo ">>> [VOID BUILDER] Working in $WORK_DIR to avoid path spaces..."
@@ -55,7 +56,21 @@ TARGET_DIR="config/includes.chroot/opt/void-os"
 mkdir -p "$TARGET_DIR"
 
 # Copy files
-rsync -av --exclude 'node_modules' --exclude 'iso_builder' --exclude '.git' "$VOID_SOURCE_DIR/" "$TARGET_DIR/"
+# EXCLUDING JUNK FILES to keep ISO small
+rsync -av \
+    --exclude 'node_modules' \
+    --exclude 'iso_builder' \
+    --exclude '.git' \
+    --exclude '*.exe' \
+    --exclude '*.msi' \
+    --exclude '*.dll' \
+    --exclude '*.cab' \
+    --exclude '*.rar' \
+    --exclude '*.zip' \
+    --exclude '*.gguf' \
+    --exclude '*.bin' \
+    --exclude '__pycache__' \
+    "$VOID_SOURCE_DIR/" "$TARGET_DIR/"
 
 # 6. Configure Autostart (Kiosk Mode)
 echo ">>> [VOID BUILDER] Configuring Kiosk Autostart..."
@@ -79,6 +94,19 @@ fcitx5 -d &
 cd /opt/void-os
 ./linux_boot.sh &
 EOF
+
+# 6.5. Pre-install dependencies (NPM) during build
+# This runs "npm install" INSIDE the ISO during creation, 
+# so it works even without internet on first boot.
+echo ">>> [VOID BUILDER] Configure Build-Time NPM Install..."
+mkdir -p config/hooks/live
+cat <<HOOK_EOF > config/hooks/live/install-deps.hook.chroot
+#!/bin/bash
+echo "Hook: Installing VOID OS dependencies..."
+cd /opt/void-os
+npm install --production
+HOOK_EOF
+chmod +x config/hooks/live/install-deps.hook.chroot
 
 # 7. Build the ISO
 echo ">>> [VOID BUILDER] STARTING BUILD PROCESS (This may take a while)..."
