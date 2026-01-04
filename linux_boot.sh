@@ -47,6 +47,6 @@ fi
 
 # 4. Launch Application
 # 4. Launch Application
-echo "Starting Electron (as root with --no-sandbox)..."
-# We must use --no-sandbox because we are running as root in the ISO
-./node_modules/.bin/electron . --no-sandbox > /var/log/void-os.log 2>&1 || xterm
+echo "Starting Electron..."
+# Try running as current user first, fallback to no-sandbox if needed
+./node_modules/.bin/electron . > /tmp/void-os.log 2>&1 || ./node_modules/.bin/electron . --no-sandbox > /tmp/void-os.log 2>&1 || xterm

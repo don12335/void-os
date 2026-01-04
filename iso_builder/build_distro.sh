@@ -104,7 +104,8 @@ cat <<HOOK_EOF > config/hooks/live/install-deps.hook.chroot
 #!/bin/bash
 echo "Hook: Installing VOID OS dependencies..."
 cd /opt/void-os
-npm install --production
+# Must NOT use --production because electron is a devDependency!
+npm install
 HOOK_EOF
 chmod +x config/hooks/live/install-deps.hook.chroot
 
