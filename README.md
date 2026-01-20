@@ -17,6 +17,7 @@ Infrastructure: Linux Kernel, Debian/Arch Base (視你用的基底而定), Custo
 Tools: AI-assisted programming, Git, ISO-tools
 
 
+
 "Every line of code is a step toward self-discovery"
 
 感謝所有路過這個專案的人。雖然 void-os 停在了這裡，但我對技術的探索才剛開始。
