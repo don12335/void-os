@@ -1,7 +1,7 @@
-# 🌑 ＶＯＩＤＯＳ (Legacy)
+# 🌑 VOIDOS (Legacy)
 "Beyond the void, lies the architecture of thought"
 
-ＶＯＩＤＯＳ 是一個實驗性的 Linux 發行版構建專案，旨在探索基於 JavaScript 與 Python 驅動的桌面環境整合，並將隱私與極簡主義發揮到極致。
+VOIDOS 是一個實驗性的 Linux 發行版構建專案，旨在探索基於 JavaScript 與 Python 驅動的桌面環境整合，並將隱私與極簡主義發揮到極致。
 # ⚠️ 專案狀態：已存檔 (Archived)
 本專案目前已停止主動開發。這是我在 13 歲時對計算機系統底層架構的一次深度探索。雖然它不再更新，但專案中留下的自動化構建邏輯與 UI 整合思路，將成為我下一個目標的養分。
 
@@ -20,4 +20,4 @@ Tools: AI-assisted programming, Git, ISO-tools
 
 # "Every line of code is a step toward self-discovery"
 
-# 感謝所有路過這個專案的人。雖然 ＶＯＩＤＯＳ 停在了這裡，但我對技術的探索才剛開始。
+# 感謝所有路過這個專案的人。雖然 VOIDOS 停在了這裡，但我對技術的探索才剛開始。
