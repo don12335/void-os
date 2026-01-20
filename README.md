@@ -1,4 +1,4 @@
-# 🌑 VOIDOS (Legacy)
+# VOIDOS (Legacy)
 "Beyond the void, lies the architecture of thought"
 
 VOIDOS 是一個實驗性的 Linux 發行版構建專案，旨在探索基於 JavaScript 與 Python 驅動的桌面環境整合，並將隱私與極簡主義發揮到極致。
